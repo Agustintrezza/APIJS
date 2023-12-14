@@ -219,15 +219,15 @@
                             <option value="/users/negocio" data-endpoint="/users/negocio">users/negocio</option>
                             <option value="/users/negocio-premium" data-endpoint="/users/negocio-premium">users/negocio-premium</option>
                             <option value="/planets/pro" data-endpoint="/planets/pro">planets/pro</option>
-                            <option value="/planets/premium" data-endpoint="/users/premium">planets/premium</option>
+                            <option value="/planets/premium" data-endpoint="/planets/premium">planets/premium</option>
                             <option value="/composers/pro" data-endpoint="/composers/pro">composers/pro</option>
-                            <option value="/composers/premium" data-endpoint="/users/premium">composers/premium</option>
+                            <option value="/composers/premium" data-endpoint="/composers/premium">composers/premium</option>
                             <option value="/cocktails/pro" data-endpoint="/cocktails/pro">cocktails/pro</option>
-                            <option value="/cocktails/premium" data-endpoint="/users/premium">cocktails/premium</option>
+                            <option value="/cocktails/premium" data-endpoint="/cocktails/premium">cocktails/premium</option>
                             <option value="/yoga/pro" data-endpoint="/yoga/pro">yoga/pro</option>
-                            <option value="/yoga/premium" data-endpoint="/users/premium">yoga/premium</option>
+                            <option value="/yoga/premium" data-endpoint="/yoga/premium">yoga/premium</option>
                             <option value="/recycling/pro" data-endpoint="/recycling/pro">recycling/pro</option>
-                            <option value="/recycling/premium" data-endpoint="/users/premium">recycling/premium</option>
+                            <option value="/recycling/premium" data-endpoint="/recycling/premium">recycling/premium</option>
                         </select>
                     </div>
                     <div class="mt-4 ms-2">
@@ -330,7 +330,7 @@ async function makeRequest() {
                 document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "No API KEY"}</pre></div>';
             } else {
                 // Mostrar mensaje genérico si falta información
-                document.getElementById('display-data').innerHTML = '<p style="color: red; font-size: 16px;">Select one Endpoint</p>';
+                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "Select one Endpoint"}</pre></div>';
             }
             return;
         }
@@ -362,7 +362,42 @@ async function makeRequest() {
         // Ocultar el spinner en caso de error
         hideSpinner();
 
-        // Resto del código de manejo de errores
+        // Manejo de errores
+    console.error('Error making request:', error);
+
+// Variable para almacenar el contenido HTML
+let content;
+
+if (error.isAxiosError && error.response.status === 401) {
+    const errorMessage = error.response.data.message;
+
+    if (errorMessage === 'Invalid API Key') {
+        // Mostrar el mensaje "Invalid API Key" en formato JSON
+        content = `<div class="json-response"><pre>${JSON.stringify({ error: 'Invalid API KEY' }, null, 2)}</pre></div>`;
+    } else if (errorMessage === 'API Key Expired') {
+        // content = '<p style="color: red; font-size: 16px;">API KEY Expired</p>';
+        content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
+
+    } else {
+        // En otros casos de 401, mostrar el mensaje original en formato JSON
+        content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error.response.data, null, 2)}</p>`;
+    }
+} else if (error.isAxiosError && error.response.status === 403) {
+    const errorMessage = error.response.data.message;
+
+    if (errorMessage === 'API Acces Denied - Auth error "/negocio-premium"' || errorMessage === 'API KEY Acces Denied - Auth error PREMIUM') {
+        content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
+    } else {
+        // En otros casos de 403, mostrar el mensaje original en formato JSON
+        content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error.response.data, null, 2)}</p>`;
+    }
+} else {
+    // En otros casos, formatear y mostrar el mensaje de error en JSON
+    content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error, null, 2)}</p>`;
+}
+
+// Establecer el contenido HTML una sola vez al final
+document.getElementById('display-data').innerHTML = content;
     }
 }
 

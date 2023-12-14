@@ -51,7 +51,7 @@ router.get("/pro", isUserPaid, async (req, res) => {
   router.get("/premium", isUserPaid, async (req, res) => {
     try {
   
-      if (req.routeType === 'PRO' || req.routeType === 'PREMIUM') {
+      if (req.routeType === 'PREMIUM') {
 
         const responseObject = {
             status: 200,
@@ -99,10 +99,15 @@ router.get("/pro", isUserPaid, async (req, res) => {
                 
         
                 res.status(200).send(responseObject);
-            } 
+            } else {
+            res.status(403).json({ message: 'API KEY Acces Denied - Auth error PREMIUM' });
+
+            }
             
         } catch (error) {
             console.log(error);
+        // res.status(403).json({ message: 'API KEY Acces Denied - Auth error PREMIUM' });
+
         }
         });
 

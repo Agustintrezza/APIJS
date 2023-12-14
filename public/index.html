@@ -254,7 +254,7 @@
                     class="text-code mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
                     required>
                     <option value="" disabled selected>Select endpoint</option>
-                    <option value="/users/negocio-premium" data-endpoint="/users/premium">/users</option>
+                    <option value="/users/negocio-premium" data-endpoint="/users/negocio-premium">/users</option>
                     <option value="/planets/premium" data-endpoint="/planets/premium">/planets</option>
                     <option value="/composers/premium" data-endpoint="/composers/premium">/composers</option>
                     <option value="/cocktails/premium" data-endpoint="/cocktails/premium">/cocktails</option>
@@ -481,7 +481,7 @@ console.log('Entra')
             } else if (!apiKey) {
                 document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "No API KEY"}</pre></div>';
             } else {
-                document.getElementById('display-data').innerHTML = '<p style="color: red; font-size: 16px;">Select one Endpoint</p>';
+                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "Select one Endpoint"}</pre></div>';
             }
             return;
         }
