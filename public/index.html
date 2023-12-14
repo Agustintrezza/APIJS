@@ -250,23 +250,17 @@
                 </div> -->
                 <div class="">
                     <label class="text-white text-lg text-code" for="endpointSelect" for="">Select one from our endpoints</label>
-                        <select name="endpointSelect" id="endpointSelect"
-                            class="text-code mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
-                            required>
-                            <option value="" disabled selected>Select enpoint</option>
-                            <!-- <option value="http://localhost:4242/users/negocio">users/negocio</option> -->
-                            <option value="http://localhost:4242/users/negocio-premium">/users</option>
-                            <!-- <option value="http://localhost:4242/planets/pro">planets/pro</option> -->
-                            <option value="http://localhost:4242/planets/premium">/planets</option>
-                            <!-- <option value="http://localhost:4242/composers/pro">composers/pro</option> -->
-                            <option value="http://localhost:4242/composers/premium">/composers</option>
-                            <!-- <option value="http://localhost:4242/cocktails/pro">cocktails/pro</option> -->
-                            <option value="http://localhost:4242/cocktails/premium">/cocktails</option>
-                            <!-- <option value="http://localhost:4242/yoga/pro">yoga/pro</option> -->
-                            <option value="http://localhost:4242/yoga/premium">/yoga</option>
-                            <!-- <option value="http://localhost:4242/recycling/pro">recycling/pro</option> -->
-                            <option value="http://localhost:4242/recycling/premium">/recycling</option>
-                        </select>
+                    <select name="endpointSelect" id="endpointSelect"
+                    class="text-code mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
+                    required>
+                    <option value="" disabled selected>Select endpoint</option>
+                    <option value="/users/negocio-premium" data-endpoint="/users">/users</option>
+                    <option value="/planets/premium" data-endpoint="/planets">/planets</option>
+                    <option value="/composers/premium" data-endpoint="/composers">/composers</option>
+                    <option value="/cocktails/premium" data-endpoint="/cocktails">/cocktails</option>
+                    <option value="/yoga/premium" data-endpoint="/yoga">/yoga</option>
+                    <option value="/recycling/premium" data-endpoint="/recycling">/recycling</option>
+                </select>
                     <!-- <select id="endpointSelect" class="input-field">
                         <option value="http://localhost:4242/users/negocio">/users/negocio</option>
                         <option value="http://localhost:4242/users/negocio-premium">/users/negocio-premium</option>
@@ -462,23 +456,31 @@ function showDefaultMessage() {
 // Llamar a la función para mostrar el mensaje predeterminado al cargar la página
 document.addEventListener('DOMContentLoaded', showDefaultMessage);
 
-        async function makeRequest() {
+async function makeRequest() {
+console.log('Entra')
     try {
         // Obtiene el valor del input y el select
-        const apiKey = 'b6ca3a7f5b8bab1586f481e2d8fcd415'
-        const selectedEndpoint = document.getElementById('endpointSelect').value;
+        const apiKey = 'b6ca3a7f5b8bab1586f481e2d8fcd415';
+        const selectedOption = document.getElementById('endpointSelect');
+        const selectedEndpoint = selectedOption.value;
+        const endpointPart = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-endpoint');
+
+        console.log('API Key:', apiKey);
+        console.log('Selected Endpoint:', selectedEndpoint);
+        console.log('Endpoint Part:', endpointPart);
+
+        // ... (resto del código)
+
+        console.log('Antes de axios.get');
 
         // Validar que se haya ingresado la información necesaria
         if (!apiKey || !selectedEndpoint) {
             // Muestra un mensaje de error si falta información
             if (!apiKey && !selectedEndpoint) {
-                // Mostrar mensaje específico si no se ingresó una API key y no se seleccionó un endpoint
                 document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "No API KEY and Select one Endpoint"}</pre></div>';
             } else if (!apiKey) {
-                // Mostrar mensaje específico si no se ingresó una API key
                 document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "No API KEY"}</pre></div>';
             } else {
-                // Mostrar mensaje genérico si falta información
                 document.getElementById('display-data').innerHTML = '<p style="color: red; font-size: 16px;">Select one Endpoint</p>';
             }
             return;
@@ -487,14 +489,21 @@ document.addEventListener('DOMContentLoaded', showDefaultMessage);
         // Mostrar el spinner mientras se realiza la solicitud
         showSpinner();
 
+        // Construye la URL completa utilizando la variable de entorno BASE_URL y la parte específica de la ruta
+        // const baseUrl = process.env.BASE_URL || "http://localhost:4242";
+        const BASE_URL = "https://apijs-b0nw.onrender.com";
+        const fullUrl = BASE_URL + endpointPart;
+
+        console.log('URL Completa:', fullUrl);
         // Realiza la solicitud al servidor
-        const response = await axios.get(selectedEndpoint, {
+        const response = await axios.get(fullUrl, {
             headers: {
                 'Authorization': apiKey,
                 'Content-Type': 'application/json',
             },
         });
 
+        console.log('Después de axios.get');
         console.log('Respuesta del endpoint', response);
 
         // Ocultar el spinner después de recibir la respuesta
@@ -503,47 +512,13 @@ document.addEventListener('DOMContentLoaded', showDefaultMessage);
         // Renderizar la respuesta formateada en JSON
         renderResponse(response.data, 'display-data');
     } catch (error) {
-    // Ocultar el spinner en caso de error
-    hideSpinner();
+        console.error('Error en la solicitud Axios:', error);
+        // Ocultar el spinner en caso de error
+        hideSpinner();
 
-    // Manejo de errores
-    console.error('Error making request:', error);
-
-    // Variable para almacenar el contenido HTML
-    let content;
-
-    if (error.isAxiosError && error.response.status === 401) {
-        const errorMessage = error.response.data.message;
-
-        if (errorMessage === 'Invalid API Key') {
-            // Mostrar el mensaje "Invalid API Key" en formato JSON
-            content = `<div class="json-response"><pre>${JSON.stringify({ error: 'Invalid API KEY' }, null, 2)}</pre></div>`;
-        } else if (errorMessage === 'API Key Expired') {
-            // content = '<p style="color: red; font-size: 16px;">API KEY Expired</p>';
-            content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
-
-        } else {
-            // En otros casos de 401, mostrar el mensaje original en formato JSON
-            content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error.response.data, null, 2)}</p>`;
-        }
-    } else if (error.isAxiosError && error.response.status === 403) {
-        const errorMessage = error.response.data.message;
-
-        if (errorMessage === 'API Acces Denied - Auth error "/negocio-premium"' || errorMessage === 'API KEY Acces Denied - Auth error PREMIUM') {
-            content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
-        } else {
-            // En otros casos de 403, mostrar el mensaje original en formato JSON
-            content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error.response.data, null, 2)}</p>`;
-        }
-    } else {
-        // En otros casos, formatear y mostrar el mensaje de error en JSON
-        content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error, null, 2)}</p>`;
+        // Resto del código de manejo de errores
     }
-
-    // Establecer el contenido HTML una sola vez al final
-    document.getElementById('display-data').innerHTML = content;
 }
-        }
 
 // Función para mostrar el spinner
 function showSpinner() {

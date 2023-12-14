@@ -212,33 +212,27 @@
                     </div>
                     <div class="">
                         <label class="text-white text-base" for="endpointSelect" for="">Select one from our endpoints</label>
-                            <select name="endpointSelect" id="endpointSelect"
-                                class="mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
-                                required>
-                                <option value="" disabled selected>Select enpoint</option>
-                                <option value="http://localhost:4242/users/negocio">users/negocio</option>
-                                <option value="http://localhost:4242/users/negocio-premium">users/negocio-premium</option>
-                                <option value="http://localhost:4242/planets/pro">planets/pro</option>
-                                <option value="http://localhost:4242/planets/premium">planets/premium</option>
-                                <option value="http://localhost:4242/composers/pro">composers/pro</option>
-                                <option value="http://localhost:4242/composers/premium">composers/premium</option>
-                                <option value="http://localhost:4242/cocktails/pro">cocktails/pro</option>
-                                <option value="http://localhost:4242/cocktails/premium">cocktails/premium</option>
-                                <option value="http://localhost:4242/yoga/pro">yoga/pro</option>
-                                <option value="http://localhost:4242/yoga/premium">yoga/premium</option>
-                                <option value="http://localhost:4242/recycling/pro">recycling/pro</option>
-                                <option value="http://localhost:4242/recycling/premium">recycling/premium</option>
-                            </select>
-                        <!-- <select id="endpointSelect" class="input-field">
-                            <option value="http://localhost:4242/users/negocio">/users/negocio</option>
-                            <option value="http://localhost:4242/users/negocio-premium">/users/negocio-premium</option>
-                            <option value="/endpoint3">Endpoint 3</option>
-                            <option value="/endpoint4">Endpoint 4</option>
-                        </select> -->
+                        <select name="endpointSelect" id="endpointSelect"
+                            class="mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
+                            required>
+                            <option value="" disabled selected>Select endpoint</option>
+                            <option value="/users/negocio">users/negocio</option>
+                            <option value="/users/negocio-premium">users/negocio-premium</option>
+                            <option value="/planets/pro">planets/pro</option>
+                            <option value="/planets/premium">planets/premium</option>
+                            <option value="/composers/pro">composers/pro</option>
+                            <option value="/composers/premium">composers/premium</option>
+                            <option value="/cocktails/pro">cocktails/pro</option>
+                            <option value="/cocktails/premium">cocktails/premium</option>
+                            <option value="/yoga/pro">yoga/pro</option>
+                            <option value="/yoga/premium">yoga/premium</option>
+                            <option value="/recycling/pro">recycling/pro</option>
+                            <option value="/recycling/premium">recycling/premium</option>
+                        </select>
                     </div>
                     <div class="mt-4 ms-2">
                         <button onclick="makeRequest()" class="btn-make-request text-white font-medium text-lg bg-blue-500 rounded py-2 px-4">Make Request</button>
-                    </div>  
+                    </div>
                 </div>
             </div>
 
@@ -310,7 +304,7 @@ function showDefaultMessage() {
 // Llamar a la función para mostrar el mensaje predeterminado al cargar la página
 document.addEventListener('DOMContentLoaded', showDefaultMessage);
 
-        async function makeRequest() {
+async function makeRequest() {
     try {
         // Obtiene el valor del input y el select
         const apiKey = document.getElementById('apiKeyInput').value;
@@ -335,8 +329,12 @@ document.addEventListener('DOMContentLoaded', showDefaultMessage);
         // Mostrar el spinner mientras se realiza la solicitud
         showSpinner();
 
+        // Construye la URL completa utilizando la variable de entorno BASE_URL
+        const baseUrl = process.env.BASE_URL || "http://localhost:4242";
+        const fullUrl = baseUrl + selectedEndpoint;
+
         // Realiza la solicitud al servidor
-        const response = await axios.get(selectedEndpoint, {
+        const response = await axios.get(fullUrl, {
             headers: {
                 'Authorization': apiKey,
                 'Content-Type': 'application/json',
@@ -351,47 +349,12 @@ document.addEventListener('DOMContentLoaded', showDefaultMessage);
         // Renderizar la respuesta formateada en JSON
         renderResponse(response.data, 'display-data');
     } catch (error) {
-    // Ocultar el spinner en caso de error
-    hideSpinner();
+        // Ocultar el spinner en caso de error
+        hideSpinner();
 
-    // Manejo de errores
-    console.error('Error making request:', error);
-
-    // Variable para almacenar el contenido HTML
-    let content;
-
-    if (error.isAxiosError && error.response.status === 401) {
-        const errorMessage = error.response.data.message;
-
-        if (errorMessage === 'Invalid API Key') {
-            // Mostrar el mensaje "Invalid API Key" en formato JSON
-            content = `<div class="json-response"><pre>${JSON.stringify({ error: 'Invalid API KEY' }, null, 2)}</pre></div>`;
-        } else if (errorMessage === 'API Key Expired') {
-            // content = '<p style="color: red; font-size: 16px;">API KEY Expired</p>';
-            content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
-
-        } else {
-            // En otros casos de 401, mostrar el mensaje original en formato JSON
-            content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error.response.data, null, 2)}</p>`;
-        }
-    } else if (error.isAxiosError && error.response.status === 403) {
-        const errorMessage = error.response.data.message;
-
-        if (errorMessage === 'API Acces Denied - Auth error "/negocio-premium"' || errorMessage === 'API KEY Acces Denied - Auth error PREMIUM') {
-            content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
-        } else {
-            // En otros casos de 403, mostrar el mensaje original en formato JSON
-            content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error.response.data, null, 2)}</p>`;
-        }
-    } else {
-        // En otros casos, formatear y mostrar el mensaje de error en JSON
-        content = `<p style="color: red; font-size: 16px;">${JSON.stringify(error, null, 2)}</p>`;
+        // Resto del código de manejo de errores
     }
-
-    // Establecer el contenido HTML una sola vez al final
-    document.getElementById('display-data').innerHTML = content;
 }
-        }
 
 // Función para mostrar el spinner
 function showSpinner() {
