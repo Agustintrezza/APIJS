@@ -216,18 +216,18 @@
                             class="mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
                             required>
                             <option value="" disabled selected>Select endpoint</option>
-                            <option value="/users/negocio">users/negocio</option>
-                            <option value="/users/negocio-premium">users/negocio-premium</option>
-                            <option value="/planets/pro">planets/pro</option>
-                            <option value="/planets/premium">planets/premium</option>
-                            <option value="/composers/pro">composers/pro</option>
-                            <option value="/composers/premium">composers/premium</option>
-                            <option value="/cocktails/pro">cocktails/pro</option>
-                            <option value="/cocktails/premium">cocktails/premium</option>
-                            <option value="/yoga/pro">yoga/pro</option>
-                            <option value="/yoga/premium">yoga/premium</option>
-                            <option value="/recycling/pro">recycling/pro</option>
-                            <option value="/recycling/premium">recycling/premium</option>
+                            <option value="/users/negocio" data-endpoint="/users/negocio">users/negocio</option>
+                            <option value="/users/negocio-premium" data-endpoint="/users/negocio-premium">users/negocio-premium</option>
+                            <option value="/planets/pro" data-endpoint="/planets/pro">planets/pro</option>
+                            <option value="/planets/premium" data-endpoint="/users/premium">planets/premium</option>
+                            <option value="/composers/pro" data-endpoint="/composers/pro">composers/pro</option>
+                            <option value="/composers/premium" data-endpoint="/users/premium">composers/premium</option>
+                            <option value="/cocktails/pro" data-endpoint="/cocktails/pro">cocktails/pro</option>
+                            <option value="/cocktails/premium" data-endpoint="/users/premium">cocktails/premium</option>
+                            <option value="/yoga/pro" data-endpoint="/yoga/pro">yoga/pro</option>
+                            <option value="/yoga/premium" data-endpoint="/users/premium">yoga/premium</option>
+                            <option value="/recycling/pro" data-endpoint="/recycling/pro">recycling/pro</option>
+                            <option value="/recycling/premium" data-endpoint="/users/premium">recycling/premium</option>
                         </select>
                     </div>
                     <div class="mt-4 ms-2">
@@ -305,10 +305,19 @@ function showDefaultMessage() {
 document.addEventListener('DOMContentLoaded', showDefaultMessage);
 
 async function makeRequest() {
+    console.log('Entra')
     try {
         // Obtiene el valor del input y el select
         const apiKey = document.getElementById('apiKeyInput').value;
-        const selectedEndpoint = document.getElementById('endpointSelect').value;
+        // const selectedEndpoint = document.getElementById('endpointSelect').value;   
+
+        const selectedOption = document.getElementById('endpointSelect');
+        const selectedEndpoint = selectedOption.value;
+        const endpointPart = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-endpoint');
+
+        console.log('API Key:', apiKey);
+        console.log('Selected Endpoint:', selectedEndpoint);
+        console.log('Endpoint Part:', endpointPart);
 
         // Validar que se haya ingresado la información necesaria
         if (!apiKey || !selectedEndpoint) {
@@ -329,11 +338,12 @@ async function makeRequest() {
         // Mostrar el spinner mientras se realiza la solicitud
         showSpinner();
 
-        // Construye la URL completa utilizando la variable de entorno BASE_URL
-        const baseUrl = process.env.BASE_URL || "http://localhost:4242";
-        const fullUrl = baseUrl + selectedEndpoint;
+        // Construye la URL completa utilizando la variable de entorno BASE_URL y la parte específica de la ruta
+        // const baseUrl = process.env.BASE_URL || "http://localhost:4242";
+        const BASE_URL = "https://apijs-b0nw.onrender.com" || "http://localhost:4242";
+        const fullUrl = BASE_URL + endpointPart;
 
-        // Realiza la solicitud al servidor
+        console.log('URL Completa:', fullUrl);
         const response = await axios.get(fullUrl, {
             headers: {
                 'Authorization': apiKey,
