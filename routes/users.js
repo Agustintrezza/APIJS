@@ -122,6 +122,7 @@ router.post("/creardata", async (req, res) => {
 router.post('/checkout', isAuth, async (req, res) => {
   try {
     // const userId = req.user.id;
+    
     const userInfoFromHeader = JSON.parse(req.headers['user-info']);
     console.log(userInfoFromHeader)
 
@@ -138,7 +139,7 @@ router.post('/checkout', isAuth, async (req, res) => {
         userId: userInfoFromHeader, // Agrega el ID del usuario como metadato
       },
       success_url:
-        'http://localhost:4242',
+        'https://apijs-b0nw.onrender.com' || 'http://localhost:4242',
       cancel_url: 'http://YOUR-WEBSITE/error',
     });
     // console.log(session)
@@ -169,7 +170,7 @@ router.post('/checkout-premium', isAuth, async (req, res) => {
         userId: userInfoFromHeader, // Agrega el ID del usuario como metadato
       },
       success_url:
-        'http://localhost:4242',
+      'https://apijs-b0nw.onrender.com' || 'http://localhost:4242',
       cancel_url: 'http://YOUR-WEBSITE/error',
     });
     // console.log(session)
