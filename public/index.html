@@ -419,7 +419,7 @@
         }
 
         function cerrarSesion() {
-            console.log(user)
+            // console.log(user)
             localStorage.removeItem('userInfo')
             window.location.href = "../signin.html"
         }
@@ -451,7 +451,7 @@ function showDefaultMessage() {
 document.addEventListener('DOMContentLoaded', showDefaultMessage);
 
 async function makeRequest() {
-console.log('Entra')
+// console.log('Entra')
     try {
         // Obtiene el valor del input y el select
         const apiKey = 'b6ca3a7f5b8bab1586f481e2d8fcd415';
@@ -459,13 +459,13 @@ console.log('Entra')
         const selectedEndpoint = selectedOption.value;
         const endpointPart = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-endpoint');
 
-        console.log('API Key:', apiKey);
-        console.log('Selected Endpoint:', selectedEndpoint);
-        console.log('Endpoint Part:', endpointPart);
+        // console.log('API Key:', apiKey);
+        // console.log('Selected Endpoint:', selectedEndpoint);
+        // console.log('Endpoint Part:', endpointPart);
 
         // ... (resto del código)
 
-        console.log('Antes de axios.get');
+        // console.log('Antes de axios.get');
 
         // Validar que se haya ingresado la información necesaria
         if (!apiKey || !selectedEndpoint) {
@@ -488,7 +488,7 @@ console.log('Entra')
         const BASE_URL = "https://apijs-b0nw.onrender.com" || "http://localhost:4242";
         const fullUrl = BASE_URL + endpointPart;
 
-        console.log('URL Completa:', fullUrl);
+        // console.log('URL Completa:', fullUrl);
         // Realiza la solicitud al servidor
         const response = await axios.get(fullUrl, {
             headers: {
@@ -497,8 +497,8 @@ console.log('Entra')
             },
         });
 
-        console.log('Después de axios.get');
-        console.log('Respuesta del endpoint', response);
+        // console.log('Después de axios.get');
+        console.log('Enpoint Response', response);
 
         // Ocultar el spinner después de recibir la respuesta
         hideSpinner();

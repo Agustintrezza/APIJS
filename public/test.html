@@ -305,7 +305,7 @@ function showDefaultMessage() {
 document.addEventListener('DOMContentLoaded', showDefaultMessage);
 
 async function makeRequest() {
-    console.log('Entra')
+    // console.log('Entra')
     try {
         // Obtiene el valor del input y el select
         const apiKey = document.getElementById('apiKeyInput').value;
@@ -315,9 +315,9 @@ async function makeRequest() {
         const selectedEndpoint = selectedOption.value;
         const endpointPart = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-endpoint');
 
-        console.log('API Key:', apiKey);
-        console.log('Selected Endpoint:', selectedEndpoint);
-        console.log('Endpoint Part:', endpointPart);
+        // console.log('API Key:', apiKey);
+        // console.log('Selected Endpoint:', selectedEndpoint);
+        // console.log('Endpoint Part:', endpointPart);
 
         // Validar que se haya ingresado la información necesaria
         if (!apiKey || !selectedEndpoint) {
@@ -343,7 +343,7 @@ async function makeRequest() {
         const BASE_URL = "https://apijs-b0nw.onrender.com" || "http://localhost:4242";
         const fullUrl = BASE_URL + endpointPart;
 
-        console.log('URL Completa:', fullUrl);
+        // console.log('URL Completa:', fullUrl);
         const response = await axios.get(fullUrl, {
             headers: {
                 'Authorization': apiKey,
@@ -351,7 +351,7 @@ async function makeRequest() {
             },
         });
 
-        console.log('Respuesta del endpoint', response);
+        console.log('Endpoint Response', response);
 
         // Ocultar el spinner después de recibir la respuesta
         hideSpinner();
