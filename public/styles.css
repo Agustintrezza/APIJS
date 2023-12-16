@@ -623,14 +623,16 @@ pre {
     display: grid;
     grid-template-columns: 33% 66%;
     gap: 20px;
-    margin-bottom: 5rem!important;
+    margin-bottom: 6rem!important;
     width: 90%;
     margin: auto;
     /* overflow-x: scroll;s */
 }
 .container-custom-titulos {
     width: 90%;
-    margin: auto;
+    margin: 3rem auto 2rem auto;
+
+
 }
 
 

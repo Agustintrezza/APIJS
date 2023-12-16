@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //   try {
 
-//     const { data } = await axios.get("/users/negocio-premium", {
+//     const { data } = await axios.get("/users/premium", {
 //       headers: {
 //         'Authorizationapi': apiKey,
 //         'Content-Type': 'application/json',

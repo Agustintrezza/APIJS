@@ -61,7 +61,7 @@ router.get("/pro", isUserPaid, async (req, res) => {
   router.get("/premium", isUserPaid, async (req, res) => {
     try {
       if (req.routeType === 'PREMIUM') {
-        // Usuario PREMIUM, permitir acceso a la ruta "/negocio-premium"
+        // Usuario PREMIUM, permitir acceso a la ruta "/premium"
         const responseObject = {
             status: 200,
             message: 'Éxito',

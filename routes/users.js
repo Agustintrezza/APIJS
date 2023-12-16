@@ -64,10 +64,10 @@ router.get("/negocio", isUserPaid, async (req, res) => {
 }
 });
 
-router.get("/negocio-premium", isUserPaid, async (req, res) => {
+router.get("/premium", isUserPaid, async (req, res) => {
   try {
     if (req.routeType === 'PREMIUM') {
-      // Usuario PREMIUM, permitir acceso a la ruta "/negocio-premium"
+      // Usuario PREMIUM, permitir acceso a la ruta "/premium"
 
       const nombre = 'Agustin';
       const responseObject = {
@@ -93,7 +93,7 @@ router.get("/negocio-premium", isUserPaid, async (req, res) => {
       res.status(200).send(responseObject);
     } else {
       // Usuario PRO o suscripción desconocida, denegar acceso
-      res.status(403).json({ message: 'API Acces Denied - Auth error "/negocio-premium"' });
+      res.status(403).json({ message: 'API Acces Denied - Auth error "/users-premium"' });
     }
   
 } catch (error) {

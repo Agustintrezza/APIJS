@@ -55,7 +55,7 @@ const isUserPaid = async (req, res, next) => {
     console.log(user.typeSuscription)
     // Verificar el tipo de suscripción
     if (user.typeSuscription === 'SUBSCRIPCIÓN PRO') {
-      // Si es una suscripción PRO, permitir acceso a la ruta "/negocio" pero denegar a "/negocio-premium"
+      // Si es una suscripción PRO, permitir acceso a la ruta "/negocio" pero denegar a "/premium"
       req.routeType = 'PRO'; // Puedes usar esto para verificar el tipo de ruta en tus rutas
       next();
     } else if (user.typeSuscription === 'SUBSCRIPCION PREMIUM') {

@@ -217,7 +217,7 @@
                             required>
                             <option value="" disabled selected>Select endpoint</option>
                             <option value="/users/negocio" data-endpoint="/users/negocio">users/negocio</option>
-                            <option value="/users/negocio-premium" data-endpoint="/users/negocio-premium">users/negocio-premium</option>
+                            <option value="/users/premium" data-endpoint="/users/premium">users/premium</option>
                             <option value="/planets/pro" data-endpoint="/planets/pro">planets/pro</option>
                             <option value="/planets/premium" data-endpoint="/planets/premium">planets/premium</option>
                             <option value="/composers/pro" data-endpoint="/composers/pro">composers/pro</option>
@@ -324,13 +324,13 @@ async function makeRequest() {
             // Muestra un mensaje de error si falta información
             if (!apiKey && !selectedEndpoint) {
                 // Mostrar mensaje específico si no se ingresó una API key y no se seleccionó un endpoint
-                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "No API KEY and Select one Endpoint"}</pre></div>';
+                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{ "error": "No API KEY and Select one Endpoint" }</pre></div>';
             } else if (!apiKey) {
                 // Mostrar mensaje específico si no se ingresó una API key
-                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "No API KEY"}</pre></div>';
+                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{ "error": "No API KEY" }</pre></div>';
             } else {
                 // Mostrar mensaje genérico si falta información
-                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{"error": "Select one Endpoint"}</pre></div>';
+                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{ "error": "Select one Endpoint" }</pre></div>';
             }
             return;
         }
@@ -385,7 +385,7 @@ if (error.isAxiosError && error.response.status === 401) {
 } else if (error.isAxiosError && error.response.status === 403) {
     const errorMessage = error.response.data.message;
 
-    if (errorMessage === 'API Acces Denied - Auth error "/negocio-premium"' || errorMessage === 'API KEY Acces Denied - Auth error PREMIUM') {
+    if (errorMessage === 'API Acces Denied - Auth error "/users/premium"' || errorMessage === 'API KEY Acces Denied - Auth error PREMIUM') {
         content = `<div class="json-response"><pre>${JSON.stringify({ error: errorMessage }, null, 2)}</pre></div>`;
     } else {
         // En otros casos de 403, mostrar el mensaje original en formato JSON
