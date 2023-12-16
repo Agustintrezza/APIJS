@@ -93,7 +93,9 @@ router.get("/negocio-premium", isUserPaid, async (req, res) => {
       res.status(200).send(responseObject);
     } else {
       // Usuario PRO o suscripción desconocida, denegar acceso
-      res.status(403).json({ message: 'API Acces Denied - Auth error "/negocio-premium"' });
+      // res.status(403).json({ message: 'API Acces Denied - Auth error "/negocio-premium"' });
+      res.status(403).json({ message: 'API KEY Acces Denied - Auth error PREMIUM' });
+
     }
   
 } catch (error) {
