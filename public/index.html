@@ -484,7 +484,7 @@ async function makeRequest() {
         showSpinner();
 
         // Construye la URL completa utilizando la variable de entorno BASE_URL y la parte específica de la ruta
-        const BASE_URL = "http://localhost:4242" || "https://apijs-b0nw.onrender.com";
+        const BASE_URL = "https://apijs-b0nw.onrender.com" || "http://localhost:4242";
         const fullUrl = BASE_URL + endpointPart;
 
         // Realiza la solicitud al servidor
