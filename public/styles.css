@@ -302,7 +302,20 @@ body {
     font-size: 40px!important;
 }
 
+.enlace-data {
+    color: rgb(31, 31, 31)!important;
+    border: 1px solid white;
+    padding: 1rem;
+    border-radius: 30px;
+    margin-top: 3rem;
+    background-color: #e8df3a;
+    border-color: transparent;
+    font-weight: 500;
+}
 
+.contenedor-enlace {
+    margin-top: 2rem!important;
+}
 
 
 /* VIDEO PRINCIPAL*/

@@ -138,32 +138,38 @@
                             class="block text-xl font-thin py-2 pl-3 pr-4 text-white hover:text-violet-400 rounded md:p-0 md:dark:text-white"
                             aria-current="page">Pricing</a>
                     </li>
+
+                    <!-- <li class="background-ul p-1">
+                        <a href="./test.html"
+                            class="block text-xl font-thin py-2 pl-3 pr-4 text-white hover:text-violet-400 rounded md:p-0 md:dark:text-white"
+                            aria-current="page">TEST</a>
+                    </li> -->
                     
-                    <svg class="text-white w-2.5 h-2.5 ml-2.5" aria-hidden="true"
+                    <!-- <svg class="text-white w-2.5 h-2.5 ml-2.5" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="m1 1 4 4 4-4" />
-                                </svg>
-                            <button data-dropdown-toggle="dropdownHover3" data-dropdown-trigger="hover"
+                                </svg> -->
+                            <!-- <button data-dropdown-toggle="dropdownHover3" data-dropdown-trigger="hover"
                                 class="text-white margin-cero bg-neutral-950 hover:text-violet-400 hover:bg-neutral-950 focus:ring-4 focus:outline-none focus:ring-red-400 font-medium rounded-lg text-xl px-1.5 py-2.5 text-center inline-flex items-center dark:bg-neutral-950 dark:hover:bg-neutral-950 dark:focus:bg-neutral-950"
                                 type="button">Sourcing
                             </button>
 
-                            <!-- Dropdown menu -->
-                            <div id="dropdownHover3"
+                            < Dropdown menu -->
+                            <!-- <div id="dropdownHover3"
                                 class="z-10 width-dropdown hidden bg-neutral-900 divide-y divide-black rounded rounded-lg shadow w-44 dark:bg-neutral-900">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="nombre-usuario">
                                     <li class="bg-neutral-950 p-2">
                                         <a href="./account.html"
                                             class="block text-xl font-thin py-2 pl-3 pr-4 text-white hover:text-violet-400 rounded md:p-0 md:dark:text-white"
                                             aria-current="page">API DOCUMENTATION</a>
-                                    </li>
+                                    </li> -->
                                     
                                     <!-- <li class="bg-neutral-950 p-2">
                                         <a href="./signup.html"
                                             class="block py-2 text-xl font-thin pl-3 pr-4 text-white hover:text-violet-400 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:dark:hover:text-violet-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-viole-500 md:dark:hover:bg-transparent dark:border-gray-700">Our Online Course</a>
                                     </li> -->
-                                    <li class="bg-neutral-950 p-2">
+                                    <!-- <li class="bg-neutral-950 p-2">
                                         <a href="./signup.html"
                                             class="block py-2 text-xl font-thin pl-3 pr-4 text-white hover:text-violet-400 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:dark:hover:text-violet-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-viole-500 md:dark:hover:bg-transparent dark:border-gray-700">Build your own API - curse</a>
                                     </li>
@@ -173,7 +179,7 @@
                                     </li>
 
                                 </ul>
-                            </div>
+                            </div> -->
 
 
                     <li class="background-ul p-1" id="ruta-login">
@@ -237,6 +243,9 @@
     <div class="container-custom-titulos">
         <h1 class="titulo-servicios text-code">Test endpoint responses</h1>
     </div>
+    <!-- <div class="container-custom-titulos mt-0">
+        <h3 class="text-code text-white"></h3>
+    </div> -->
 
     <div class="custom-grid2">
         <div>
@@ -247,12 +256,12 @@
                     class="text-code mt-2 bg-neutral-800 w-full rounded-md text-white text-sm p-2 h-10 placeholder:text-sm focus-visible:outline-none"
                     required>
                     <option value="" disabled selected>Select endpoint</option>
-                    <option value="/planets/premium" data-endpoint="/planets/premium">/planets</option>
-                    <option value="/composers/premium" data-endpoint="/composers/premium">/composers</option>
-                    <option value="/cocktails/premium" data-endpoint="/cocktails/premium">/cocktails</option>
-                    <option value="/yoga/premium" data-endpoint="/yoga/premium">/yoga</option>
-                    <option value="/recycling/premium" data-endpoint="/recycling/premium">/recycling</option>
-                    <option value="/users/negocio-premium" data-endpoint="/users/negocio-premium">/users</option>
+                    <option value="/planets/premium" data-endpoint="/planets/premium">/planets [{8}]</option>
+                    <option value="/composers/premium" data-endpoint="/composers/premium">/composers [{10}]</option>
+                    <option value="/cocktails/premium" data-endpoint="/cocktails/premium">/cocktails [{14}]</option>
+                    <option value="/yoga/premium" data-endpoint="/yoga/premium">/yoga [{11}]</option>
+                    <option value="/recycling/premium" data-endpoint="/recycling/premium">/recycling [{5}]</option>
+                    <option value="/users/negocio-premium" data-endpoint="/users/negocio-premium">/users [{15}]</option>
 
                 </select>
                     <!-- <select id="endpointSelect" class="input-field">
@@ -264,7 +273,10 @@
                 </div>
                 <div class="mt-4 ms-2">
                     <button onclick="makeRequest()" class="btn-make-request text-white font-medium text-lg bg-blue-500 rounded py-2 px-4 text-code">Make your request</button>
-                </div>  
+                    <div class="contenedor-enlace" id="view-all-link" style="display: none;">
+                        <a class="enlace-data" href="#" onclick="viewAllResponse(response ? response.data : null)">View All Response</a>
+                    </div>
+                </div>      
             </div>
         </div>
 
@@ -441,42 +453,30 @@
         Prism.highlightAll();
 
 
-                // Función para mostrar un mensaje predeterminado en el contenedor
-function showDefaultMessage() {
-    const defaultMessage = { message: "Enter your data and make request" };
-    renderResponse(defaultMessage, 'display-data');
-}
+
 
 // Llamar a la función para mostrar el mensaje predeterminado al cargar la página
 document.addEventListener('DOMContentLoaded', showDefaultMessage);
 
+let currentResponse;
+let apiKey = 'b6ca3a7f5b8bab1586f481e2d8fcd415';
+let response = null; // Declara la variable response
+
 async function makeRequest() {
-// console.log('Entra')
     try {
         // Obtiene el valor del input y el select
-        const apiKey = 'b6ca3a7f5b8bab1586f481e2d8fcd415';
         const selectedOption = document.getElementById('endpointSelect');
         const selectedEndpoint = selectedOption.value;
         const endpointPart = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-endpoint');
 
-        // console.log('API Key:', apiKey);
-        // console.log('Selected Endpoint:', selectedEndpoint);
-        // console.log('Endpoint Part:', endpointPart);
-
-        // ... (resto del código)
-
-        // console.log('Antes de axios.get');
-
         // Validar que se haya ingresado la información necesaria
         if (!apiKey || !selectedEndpoint) {
             // Muestra un mensaje de error si falta información
-            if (!apiKey && !selectedEndpoint) {
-                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{ "error": "No API KEY and Select one Endpoint" }</pre></div>';
-            } else if (!apiKey) {
-                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{ "error": "No API KEY" }</pre></div>';
-            } else {
-                document.getElementById('display-data').innerHTML = '<div class="json-response"><pre>{ "error": "Select one Endpoint" }</pre></div>';
-            }
+            const errorMessage = (!apiKey && !selectedEndpoint) ? 'No API KEY and Select one Endpoint' :
+                                (!apiKey) ? 'No API KEY' :
+                                'Select one Endpoint';
+
+            document.getElementById('display-data').innerHTML = `<div class="json-response"><pre>{ "error": "${errorMessage}" }</pre></div>`;
             return;
         }
 
@@ -484,36 +484,47 @@ async function makeRequest() {
         showSpinner();
 
         // Construye la URL completa utilizando la variable de entorno BASE_URL y la parte específica de la ruta
-        // const baseUrl = process.env.BASE_URL || "http://localhost:4242";
-        const BASE_URL = "https://apijs-b0nw.onrender.com" || "http://localhost:4242";
+        const BASE_URL = "http://localhost:4242" || "https://apijs-b0nw.onrender.com";
         const fullUrl = BASE_URL + endpointPart;
 
-        // console.log('URL Completa:', fullUrl);
         // Realiza la solicitud al servidor
-        const response = await axios.get(fullUrl, {
+        response = await axios.get(fullUrl, {
             headers: {
                 'Authorization': apiKey,
                 'Content-Type': 'application/json',
             },
         });
 
-        // console.log('Después de axios.get');
+        // Log de información de la respuesta
         console.log('Enpoint Response', response);
 
         // Ocultar el spinner después de recibir la respuesta
         hideSpinner();
 
-        // Renderizar la respuesta formateada en JSON
-        renderResponse(response.data, 'display-data');
+        // Verifica si la solicitud fue exitosa
+        if (response && response.data) {
+            // Renderizar la respuesta formateada en JSON
+            renderResponse(response.data, 'display-data');
+        } else {
+            // Muestra un mensaje de error si no hay datos en la respuesta
+            showErrorMessage('Error: Empty response data');
+        }
     } catch (error) {
+        // Log de información del error
         console.error('Error en la solicitud Axios:', error);
+
+        // Verifica si el error tiene una respuesta (response)
+        if (error.response) {
+            console.error('Error Response Data:', error.response.data);
+            showErrorMessage('Error: ' + error.response.data.message);
+        } else {
+            showErrorMessage('Error en la solicitud Axios');
+        }
+
         // Ocultar el spinner en caso de error
         hideSpinner();
-
-        // Resto del código de manejo de errores
     }
 }
-
 // Función para mostrar el spinner
 function showSpinner() {
     const spinnerElement = document.getElementById('loading-spinner');
@@ -530,23 +541,86 @@ function hideSpinner() {
     }
 }
 
-// Función para renderizar la respuesta como JSON formateado
-function renderResponse(responseData, containerId) {
-  const responseContainer = document.getElementById(containerId);
-  const responseContent = document.createElement('div');
-  responseContent.classList.add('json-response');
-
-  // Crea un elemento <pre> para mostrar la respuesta como JSON
-  const preElement = document.createElement('pre');
-  preElement.textContent = JSON.stringify(responseData, null, 2);
-
-  // Agrega el <pre> al contenedor
-  responseContent.appendChild(preElement);
-
-  // Agrega el contenido al contenedor principal
-  responseContainer.innerHTML = '';
-  responseContainer.appendChild(responseContent);
+// Función para mostrar un mensaje predeterminado en el contenedor
+function showDefaultMessage() {
+  const defaultMessage = { message: "Enter your data and make request" };
+  renderResponse(defaultMessage, 'display-data');
 }
+
+function renderResponse(responseData, containerId) {
+    const responseContainer = document.getElementById(containerId);
+    const responseContent = document.createElement('div');
+    responseContent.classList.add('json-response');
+
+    // Verifica si hay datos en responseData y si es un array no vacío
+    if (Array.isArray(responseData.data) && responseData.data.length > 0) {
+        // Toma solo el primer objeto del array (posición 0)
+        const firstObject = responseData.data[0];
+
+        // Crea un elemento <pre> para mostrar el primer objeto como JSON
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(firstObject, null, 2);
+
+        // Agrega el <pre> al contenedor
+        responseContent.appendChild(preElement);
+
+        // Muestra el contenedor del enlace "View All Response"
+        const viewAllLinkContainer = document.getElementById('view-all-link');
+        viewAllLinkContainer.style.display = 'block'; // Cambia 'block' a 'inline' si es más adecuado para tu diseño
+    } else {
+        // Si no hay datos o el array está vacío, muestra el mensaje por defecto
+        const defaultMessage = { message: "Enter your data and make request" };
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(defaultMessage, null, 2);
+
+        // Agrega el <pre> al contenedor
+        responseContent.appendChild(preElement);
+
+        // Oculta el contenedor del enlace "View All Response" si no hay respuesta
+        const viewAllLinkContainer = document.getElementById('view-all-link');
+        viewAllLinkContainer.style.display = 'none';
+    }
+
+    // Agrega el contenido al contenedor principal
+    responseContainer.innerHTML = '';
+    responseContainer.appendChild(responseContent);
+}
+
+
+function viewAllResponse(responseData) {
+  // Verifica si responseData es undefined o nulo
+  if (responseData === undefined || responseData === null) {
+    console.error('Error: responseData is undefined or null.');
+    // Puedes mostrar un mensaje al usuario o manejar el error de otra manera
+    return;
+  }
+
+  // Convierte la respuesta a una cadena JSON formateada
+  const jsonString = JSON.stringify(responseData, null, 2);
+
+  try {
+    // Intenta analizar la cadena JSON para asegurarse de que sea válida
+    JSON.parse(jsonString);
+
+    // Crea un blob a partir de la cadena JSON
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // Crea una URL para el blob
+    const url = URL.createObjectURL(blob);
+
+    // Abre una nueva ventana con la URL del blob
+    window.open(url, '_blank');
+  } catch (error) {
+    console.error('Error parsing JSON:', error);
+    // Manejar el error, por ejemplo, mostrar un mensaje al usuario
+  }
+}
+
+
+// Ejemplo de cómo llamar a la función showDefaultMessage al cargar la página
+document.addEventListener('DOMContentLoaded', showDefaultMessage);
+// Ejemplo de cómo llamar a la función showDefaultMessage al cargar la página
+showDefaultMessage();
 
 
 

@@ -11,7 +11,7 @@ const { validationResult } = require("express-validator");
 const { formatISO, add, parseISO } = require('date-fns');
 const {isAuth, isUserPaid} = require("../public/scripts/utils/utils");
 // const isUserPaid = require("../public/scripts/utils/utils");
-
+const usersData = require('../db/usersData');
 dotenv.config();
 
 const stripe = require('stripe')('sk_test_51MpcnREFbtwHkKNRH6otmFgmIxUQR8k0y7gQyJatb71LanFGlJjhJGgt3LdX2i437H32i1DyFe7SJNF6fMgR0KCk00Rm9Rkgqw');
@@ -72,23 +72,8 @@ router.get("/negocio-premium", isUserPaid, async (req, res) => {
       const nombre = 'Agustin';
       const responseObject = {
         status: 200,
-        message: 'Éxito',
-        data: {
-          id: '269684728',
-          name: nombre,
-          lastname: 'Trezza',
-          age: 35,
-          born:'06-09-1988',
-          country: 'Australia',
-          hobbies: ['Drums', 'Web Development', 'Fútbol', 'Yoga'],
-          video: 'https://www.youtube.com/watch?v=UUltDtz4F8c&ab_channel=Buddha%27sFluteMusic',
-          imagen: 'https://res.cloudinary.com/djpifu0cl/image/upload/v1690756537/h6i3es2vccpmahhybbkq.webp',
-          historial: {
-            infancia: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-            adolescencia: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-            vejez: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-          }
-        },
+          message: 'Éxito',
+          data: usersData,
       };
       res.status(200).send(responseObject);
     } else {
