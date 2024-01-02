@@ -3,6 +3,7 @@ const router = express.Router();
 const {isAuth, isUserPaid} = require("../public/scripts/utils/utils");
 
 const yogaData = require('../db/yogaData');
+const yogaDataPro = require("../db/yogaDataPro");
 
 
 module.exports = router;
@@ -15,31 +16,7 @@ router.get("/pro", isUserPaid, async (req, res) => {
         const responseObject = {
             status: 200,
   message: 'Éxito',
-  data: {
-    id: '2',
-    name: 'Adho Mukha Svanasana',
-    category: 'Yoga',
-    benefits: [
-      'Estiramiento de la columna y los músculos de la espalda',
-      'Fortalecimiento de brazos, piernas y abdomen',
-      'Mejora de la circulación sanguínea',
-      'Alivio del estrés y la fatiga',
-    ],
-    steps: [
-      'Desde la posición de mesa, eleva las caderas formando una "V" invertida.',
-      'Mantén los talones bajos hacia el suelo, estira los brazos y relaja la cabeza.',
-      'Respira profundamente y mantén la posición durante 30-60 segundos.',
-    ],
-    tips: [
-      'Alinea las muñecas debajo de los hombros y los dedos de los pies hacia adelante.',
-      'Engancha los músculos abdominales para estabilizar la postura.',
-    ],
-    contraindications: [
-      'Evita si tienes lesiones en muñecas, hombros o espalda.',
-      'No recomendado para presión arterial alta o problemas cardíacos.',
-    ],
-    image: 'https://ejemplo.com/adho-mukha-svanasana-imagen.jpg',
-  },
+  data: yogaDataPro
 };
           
   

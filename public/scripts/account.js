@@ -146,9 +146,23 @@ const mostrarData = async () => {
 
       const fechaFin = fechaVencimiento ? new Date(fechaVencimiento) : null;
       const fechaFormateadaFin = fechaFin ? fechaFin.toLocaleDateString('es-ES', opcionesFecha) : '';
+  
+      window.redirectPricing = () => {
+        window.location.href = '../pricing.html'
+      }
+
+      window.copiarAlPortapapeles = (texto) => {
+        const textarea = document.createElement('textarea');
+        textarea.value = texto;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('API Key copiada al portapapeles');
+      };
 
       const userHtml = `
-      <div class="flex p-2 m-auto">
+      <div class="grid-custom-account p-2 m-auto">
       <div class="flex flex-col p-1">
         <div class="flex g-5 items-center">
           <p class="text-white text-2xl">${nombre} ${apellido}</p>
@@ -164,6 +178,12 @@ const mostrarData = async () => {
           ${renderizarBilling(precioSuscripcion, invoice)}
         </div>
       </div>
+
+      <div class="flex flex-col justify-center">
+      <h1 class="text-2xl mb-4">Create your FIRST subscription 100% free of charge and test the API.</h1>
+      <div class="contenedor-boton-card">
+          <button onclick="redirectPricing()" class="boton-card">Suscribe</button>
+      
     </div>
       `;
 

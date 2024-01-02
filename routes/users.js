@@ -12,6 +12,7 @@ const { formatISO, add, parseISO } = require('date-fns');
 const {isAuth, isUserPaid} = require("../public/scripts/utils/utils");
 // const isUserPaid = require("../public/scripts/utils/utils");
 const usersData = require('../db/usersData');
+const usersDataPro = require('../db/usersDataPro');
 dotenv.config();
 
 const stripe = require('stripe')('sk_test_51MpcnREFbtwHkKNRH6otmFgmIxUQR8k0y7gQyJatb71LanFGlJjhJGgt3LdX2i437H32i1DyFe7SJNF6fMgR0KCk00Rm9Rkgqw');
@@ -30,34 +31,22 @@ router.get("/userinfo/:id", async (req, res) => {
 
 router.get("/negocio", isUserPaid, async (req, res) => {
   try {
+    if (req.routeType === 'PREMIUM') {
+      // Usuario PREMIUM, permitir acceso a la ruta "/negocio-premium"
 
-    if (req.routeType === 'PRO' || req.routeType === 'PREMIUM') {
-      // Usuario PRO, permitir acceso a la ruta "/negocio"
-      // ... tu lógica aquí ...
-      // Crear un objeto de respuesta
-        const nombre = 'Sebastián';
-        const responseObject = {
-          status: 200,
+      // const nombre = 'Agustin';
+      const responseObject = {
+        status: 200,
           message: 'Éxito',
-          data: {
-            id: '269684728',
-            name: nombre,
-            lastname: '',
-            age: 35,
-            born:'06-09-1988',
-            country: 'California',
-            hobbies: ['Drums', 'Web Development', 'Fútbol', 'Yoga'],
-            // video: 'https://www.youtube.com/watch?v=UUltDtz4F8c&ab_channel=Buddha%27sFluteMusic',
-            // imagen: 'https://res.cloudinary.com/djpifu0cl/image/upload/v1690756537/h6i3es2vccpmahhybbkq.webp',
-            // historial: {
-            //   infancia: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-            //   adolescencia: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-            //   vejez: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-            // }
-          },
-        };
-        res.status(200).send(responseObject);
-    } 
+          data: usersDataPro,
+      };
+      res.status(200).send(responseObject);
+    } else {
+      // Usuario PRO o suscripción desconocida, denegar acceso
+      // res.status(403).json({ message: 'API Acces Denied - Auth error "/negocio-premium"' });
+      res.status(403).json({ message: 'API KEY Acces Denied - Auth error PREMIUM' });
+
+    }
   
 } catch (error) {
   console.log(error);

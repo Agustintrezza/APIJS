@@ -611,16 +611,38 @@ pre {
 
 
 .contenedor-data-usuario {
-    margin-top: 7rem!important;
+    margin-top: 3rem!important;
+    width: 85%;
+    margin: auto;
+}
+.contenedor-data-usuario2 {
+    margin-top: 1rem!important;
+    width: 85%;
+    margin: auto;
+}
+.contenedor-data-usuario3 {
+    margin-top: 6rem!important;
     width: 85%;
     margin: auto;
 }
 .titulo-data-usuario {
     color: white;
     font-size: 40px;
+    margin-top: 0rem;
+}
+.titulo-data-usuario2 {
+    color: white;
+    font-size: 40px;
+    margin-top: 3rem;
 }
 .span-custom {
     font-size: 10px!important;
+}
+.grid-custom-account {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    align-items: flex-start;
+    margin-top: 1rem!important;
 }
 .custom-grid {
     display: grid;
@@ -631,7 +653,9 @@ pre {
     margin: auto;
     /* overflow-x: scroll;s */
 }
-
+.active {
+    color: violet!important;
+}
 .custom-grid2 {
     display: grid;
     grid-template-columns: 33% 66%;

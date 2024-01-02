@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {isAuth, isUserPaid} = require("../public/scripts/utils/utils");
 const planetsData = require('../db/planetsData');
+const planetsDataPro = require('../db/planetsDataPro');
 
 
 router.get("/pro", isUserPaid, async (req, res) => {
@@ -12,22 +13,7 @@ router.get("/pro", isUserPaid, async (req, res) => {
         const responseObject = {
           status: 200,
           message: 'Éxito',
-          data: {
-            id: '1',
-            name: 'Mercurio',
-            type: 'Planeta terrestre',
-            diameter: '4,880 kilómetros',
-            distanceFromSun: '57.9 millones de kilómetros',
-            orbitalPeriod: '88 días terrestres',
-            dayLength: '58.6 días terrestres',
-            temperature: ['-173 °C (noche)', '427 °C (día)'],
-            surfaceFeatures: ['Cráteres', 'Llanuras', 'Escarpas', 'Rocas espaciales'],
-            atmosphere: {
-              composition: ['Oxígeno', 'Sodio', 'Hidrógeno', 'Helio'],
-              thickness: 'Muy delgada',
-              conditions: 'Sin atmósfera significativa',
-            },
-          },
+          data: planetsDataPro,
         };
           
   
