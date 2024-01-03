@@ -128,6 +128,24 @@ const mostrarData = async () => {
         }
       };
 
+      const renderizarMensaje = (precioSuscripcion) => {
+        if(precioSuscripcion) {
+          return `
+            <h1 class="text-2xl mb-4">Use your API KEY to test our endpoints</h1>
+            <div class="contenedor-boton-card">
+                <button onclick="redirectTest()" class="boton-card">Test</button>
+            </div>
+          `
+        } else {
+          return `
+            <h1 class="text-2xl mb-4">Create your FIRST subscription 100% free of charge and test the API.</h1>
+            <div class="contenedor-boton-card">
+                <button onclick="redirectPricing()" class="boton-card">Suscribe</button>
+            </div>
+          `
+        }
+      }
+
       const {
         nombre,
         apellido,
@@ -149,6 +167,10 @@ const mostrarData = async () => {
   
       window.redirectPricing = () => {
         window.location.href = '../pricing.html'
+      }
+
+      window.redirectTest = () => {
+        window.location.href = '../test.html'
       }
 
       window.copiarAlPortapapeles = (texto) => {
@@ -180,11 +202,8 @@ const mostrarData = async () => {
       </div>
 
       <div class="flex flex-col justify-center">
-      <h1 class="text-2xl mb-4">Create your FIRST subscription 100% free of charge and test the API.</h1>
-      <div class="contenedor-boton-card">
-          <button onclick="redirectPricing()" class="boton-card">Suscribe</button>
-      
-    </div>
+        ${renderizarMensaje(precioSuscripcion)}
+      </div>
       `;
 
       display.innerHTML = userHtml;

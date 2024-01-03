@@ -88,7 +88,7 @@ window.copiarAlPortapapeles = (texto) => {
               <div>
                 ${renderizarSubscriptionDetails2(fechaInicio, fechaFin, subscripcionTitle)}
               </div>
-              <div class="mt-2">
+              <div class="mt-0">
                   
                     <div class="flex items-center mb-4">
                     <p class="text-blue-400 text-2xl">API KEY PRO 'be3b76d1a581960973dccf6ec0c26563'</p>
@@ -104,7 +104,7 @@ window.copiarAlPortapapeles = (texto) => {
           `;
         } else {
           return `
-            <div class="mt-2 flex items-center w-full gap-52">
+            <div class="mt-2 flex items-center w-full gap-32">
   
                 <div>
           <h1 class="text-white text-3xl mb-4">CREATE YOUR FIRST KEY</h1>
@@ -120,9 +120,14 @@ window.copiarAlPortapapeles = (texto) => {
                     <a href="/pricing.html" class="text-white text-xl border rounded p-2 hover:text-blue-400">CREATE YOUR FIRST API KEY</a>
                   </div>
                     
-
-                    <p class="text-white">FREE KEY PRO 'be3b76d1a581960973dccf6ec0c26563'</p>
-                    <p class="text-white">FREE KEY PREMIUM '1e30cbfe912e3b8125283ddfe4d8bb8d'</p>
+                    <div class="flex items-center my-4">
+                      <p class="text-white">FREE KEY PRO 'be3b76d1a581960973dccf6ec0c26563'</p>
+                      <button onclick="copiarAlPortapapeles('${apiPro}')" class="ml-5 bg-blue-500 text-white px-4 py-2 rounded">Copy</button>
+                    </div>
+                    <div class="flex items-center">
+                      <p class="text-white">FREE KEY PREMIUM '1e30cbfe912e3b8125283ddfe4d8bb8d'</p>
+                      <button onclick="copiarAlPortapapeles('${apiPremium}')" class="ml-5 bg-blue-500 text-white px-4 py-2 rounded">Copy</button>
+                    </div>
                 </div>
             </div>
           `;
