@@ -76,6 +76,7 @@ window.copiarAlPortapapeles = (texto) => {
       
       const apiPro = 'be3b76d1a581960973dccf6ec0c26563';
       const apiPremium = '1e30cbfe912e3b8125283ddfe4d8bb8d';
+      const apiExpired = '4e06307a4a582ac6d13aee9aebc8d4d2';
 
       const renderizarCredenciales = (apiKey) => {
         if (apiKey) {
@@ -90,7 +91,7 @@ window.copiarAlPortapapeles = (texto) => {
               </div>
               <div class="mt-0">
                   
-                    <div class="flex items-center mb-4">
+                    <div class="flex items-center mt-3 mb-3">
                     <p class="text-blue-400 text-2xl">API KEY PRO 'be3b76d1a581960973dccf6ec0c26563'</p>
                     <button onclick="copiarAlPortapapeles('${apiPro}')" class="ml-5 bg-blue-500 text-white px-4 py-2 rounded">Copy</button>
                     </div>
@@ -98,6 +99,10 @@ window.copiarAlPortapapeles = (texto) => {
                     <div class="flex items-center">
                     <p class="text-yellow-500 text-2xl">API KEY PREMIUM '1e30cbfe912e3b8125283ddfe4d8bb8d'</p>
                     <button onclick="copiarAlPortapapeles('${apiPremium}')" class="ml-5 bg-blue-500 text-white px-4 py-2 rounded">Copy</button>
+                    </div>
+                    <div class="flex items-center mt-3">
+                    <p class="text-red-400 text-2xl">API KEY EXPIRED '4e06307a4a582ac6d13aee9aebc8d4d2'</p>
+                    <button onclick="copiarAlPortapapeles('${apiExpired}')" class="ml-5 bg-blue-500 text-white px-4 py-2 rounded">Copy</button>
                     </div>
                 </div>
             </div>

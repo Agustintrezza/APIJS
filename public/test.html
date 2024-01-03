@@ -410,7 +410,11 @@ function handleErrorResponse(error) {
     // Verifica si la respuesta tiene un código de estado y personaliza el mensaje de error
     if (error.response && error.response.status === 403) {
         errorMessage.error = 'API KEY Access Denied - Auth error PREMIUM';
-    }
+    } else if (error.response.status === 401) {
+            errorMessage.error = 'API KEY Invalid';
+        } else if (error.response.status === 402) {
+            errorMessage.error = 'API KEY Expired';
+        }
 
     renderResponse(errorMessage, 'display-data');
 }

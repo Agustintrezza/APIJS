@@ -47,7 +47,7 @@ const isUserPaid = async (req, res, next) => {
     const fechaActual = new Date();
     if (fechaActual > user.fechaVencimiento) {
       console.log('La suscripción ha expirado para el usuario:', user._id);
-      return res.status(401).json({ message: 'API Key Expired' }); // Cambiado a "message"
+      return res.status(402).json({ message: 'API Key Expired' }); // Cambiado a "message"
     }
 
     // Agrega el usuario a la solicitud para que puedas acceder a él en las rutas protegidas
